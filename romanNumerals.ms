@@ -1,27 +1,27 @@
 import "qa"
 
-numberToRoman = function(number)
-	currentNumber = number
+numberToRoman = function(n)
+	currentNumber = n
 	result = ""
-	numberMap = {1000 : "M", 500 : "D", 100: "C",50 : "L", 10 : "X", 5 : "V", 1 : "I"}
+	numbers = [1000, 500, 100, 50, 10 , 5, 1]
+	romanDigits = ["M","D","C","L","X","V","I"]
 	
 	while currentNumber > 0
-		for entry in numberMap
-			currentKeyIndex = numberMap.indexes.indexOf(entry.key)
-			if currentNumber >= entry.key then
-				result = result + entry.value
-				currentNumber = currentNumber - entry.key
+		for i in range(0, numbers.len-1)
+			if currentNumber >= numbers[i] then
+				result = result + romanDigits[i]
+				currentNumber = currentNumber - numbers[i]
 				break
-			else if (currentKeyIndex+1) % 2 == 0 then
-				if currentKeyIndex < numberMap.len-1 and currentNumber+numberMap.indexes[currentKeyIndex+1] >= entry.key then
-					result = result + numberMap[numberMap.indexes[currentKeyIndex+1]]
-					currentNumber = currentNumber + numberMap.indexes[currentKeyIndex+1]
+			else if (i+1) % 2 == 0 then
+				if i < numbers.len-1 and currentNumber+numbers[i+1] >= numbers[i] then
+					result = result + romanDigits[i+1]
+					currentNumber = currentNumber + numbers[i+1]
 					break
 				end if
 			else
-				if currentKeyIndex < numberMap.len-2 and currentNumber+numberMap.indexes[currentKeyIndex+2] >= entry.key then
-					result = result + numberMap[numberMap.indexes[currentKeyIndex+2]]
-					currentNumber = currentNumber + numberMap.indexes[currentKeyIndex+2]
+				if i < numbers.len-2 and currentNumber+numbers[i+2] >= numbers[i] then
+					result = result + romanDigits[i+2]
+					currentNumber = currentNumber + numbers[i+2]
 					break
 				end if
 			end if
